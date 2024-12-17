@@ -1,0 +1,38 @@
+{
+	"name": "api",
+	"main": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"build": "tsc -p ../../packages/common -noEmit && tsx ./build.ts",
+		"clean": "rm -rf ./dist",
+		"start": "node ./dist/server.cjs"
+	},
+	"dependencies": {
+		"@aws-sdk/client-s3": "^3.645.0",
+		"@hono/node-server": "^1.13.1",
+		"@hono/zod-validator": "^0.2.2",
+		"@lucia-auth/adapter-prisma": "^4.0.1",
+		"@node-rs/argon2": "^1.8.3",
+		"@prisma/client": "5.18.0",
+		"dotenv": "^16.4.5",
+		"hono": "^4.6.3",
+		"hono-rate-limiter": "^0.4.0",
+		"lucia": "^3.2.0",
+		"sharp": "^0.33.5",
+		"nodemailer": "^6.9.15",
+		"oslo": "^1.2.1",
+		"ulid": "^2.3.0",
+		"zod": "^3.23.8",
+		"common": "workspace:^"
+	},
+	"devDependencies": {
+		"@types/node": "^20.16.6",
+		"@types/nodemailer": "^6.4.16",
+		"prisma": "^5.19.1",
+		"@types/sharp": "^0.32.0",
+		"esbuild": "^0.24.0",
+		"tsx": "^4.19.1",
+		"typescript": "^5.6.3"
+	}
+}

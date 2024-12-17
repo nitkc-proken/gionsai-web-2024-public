@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"strict": true,
+		"types": ["node"],
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"paths": {
+			"~/*": ["./src/*"],
+			"@common/*": ["../../packages/common/*"]
+		},
+		"declaration": true,
+		"declarationMap": true,
+		"rootDir": ".",
+		"composite": true,
+		"outDir": "dist",
+		"resolveJsonModule": true
+	},
+	"references": [{ "path": "../../packages/common/" }]
+}
