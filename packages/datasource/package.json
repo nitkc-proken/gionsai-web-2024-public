@@ -1,0 +1,35 @@
+{
+	"name": "datasource",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"preprocess": "tsx src/preprocessor/index.ts",
+		"sync": "tsx src/deploy/index.ts",
+		"jsonschema": "json2ts -i assets/schema/ -o src/generated/types/",
+		"invites": "tsx src/script/CreateDashboardInvites.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^20.11.17",
+		"@types/object-hash": "^3.0.6",
+		"@types/react": "^18.2.20",
+		"json-schema-to-typescript": "^15.0.2",
+		"tsx": "^4.7.1",
+		"typescript": "^5.1.6",
+		"common": "workspace:^"
+	},
+	"dependencies": {
+		"@aws-sdk/client-s3": "^3.645.0",
+		"@types/js-yaml": "^4.0.9",
+		"dotenv": "^16.4.5",
+		"js-yaml": "^4.1.0",
+		"object-hash": "^3.0.0",
+		"react": "^18.2.0",
+		"satori": "^0.11.2",
+		"sharp": "^0.33.5",
+		"xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
+		"zod": "^3.23.8"
+	}
+}

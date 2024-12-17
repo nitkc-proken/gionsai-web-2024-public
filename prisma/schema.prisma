@@ -1,0 +1,172 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id             Int      @id @default(autoincrement())
+  name           String
+  categoryPrefix String
+  category       Category @relation(fields: [categoryPrefix], references: [prefix])
+  description    String
+  alias          String   @unique @db.VarChar(50)
+  location       String
+  floorId        Int
+  floor          Floor    @relation(fields: [floorId], references: [id])
+
+  visible Boolean
+  groupId Int
+  group   Group   @relation(fields: [groupId], references: [id])
+
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  thumbnailId         String?              @unique
+  thumbnail           Image?               @relation(name: "thumbnail", fields: [thumbnailId], references: [id])
+  ogpImageId          String?              @unique
+  ogpImage            Image?               @relation(name: "ogpImage", fields: [ogpImageId], references: [id])
+  images              Image[]
+  notifications       Notification[]
+}
+
+model Floor {
+  id         Int      @id @default(autoincrement())
+  // 1階しかないものはnull
+  name       String?
+  mapImageId String   @unique
+  mapImage   Image    @relation(fields: [mapImageId], references: [id])
+  buildingId Int
+  building   Building @relation(fields: [buildingId], references: [id])
+
+  projects Project[]
+}
+
+model Building {
+  id   Int    @id @default(autoincrement())
+  name String
+  mapX Float
+  mapY Float
+
+  floors Floor[]
+}
+
+model Category {
+  prefix String @id @db.VarChar(7)
+  name   String @db.VarChar(50)
+
+  projects Project[]
+}
+
+model Notification {
+  id             Int     @id @default(autoincrement())
+  projectId      Int
+  project        Project @relation(fields: [projectId], references: [id])
+  title          String  @db.VarChar(255)
+  content        String
+  createMemberId String
+  createMember   Member  @relation(fields: [createMemberId], references: [id])
+  visible        Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Image {
+  id             String @id @default(cuid())
+  path           String
+  alt            String
+  createMemberId String
+  createMember   Member @relation(fields: [createMemberId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[]
+
+  thumbnailProject Project? @relation(name: "thumbnail")
+
+  ogpImageProject Project? @relation(name: "ogpImage")
+  floor           Floor?   @relation
+}
+
+model InviteCode {
+  id         String   @id @default(cuid())
+  code       String   @unique @default(uuid())
+  groupId    Int
+  group      Group    @relation(fields: [groupId], references: [id])
+  permission Int
+  count      Int      @default(0)
+  limit      Int?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Group {
+  id      Int     @id @default(autoincrement())
+  name    String  @db.VarChar(255)
+  isSuper Boolean
+
+  projects          Project[]
+  memberPermissions MemberPermission[]
+  inviteCodes       InviteCode[]
+}
+
+model MemberPermission {
+  groupId    Int
+  memberId   String
+  group      Group  @relation(fields: [groupId], references: [id])
+  member     Member @relation(fields: [memberId], references: [id])
+  permission Int
+
+  @@id([groupId, memberId])
+}
+
+model Member {
+  id       String @id @default(cuid())
+  username String @db.VarChar(255)
+  userId   String @unique @db.Uuid
+  user     User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  images              Image[]
+  memberPermissions   MemberPermission[]
+  notifications       Notification[]
+}
+
+model User {
+  id           String  @id @default(uuid()) @db.Uuid
+  email        String  @unique @db.VarChar(255)
+  //システムユーザーにはパスワードはない
+  passwordHash String?
+  member       Member?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sessions Session[]
+}
+
+model Session {
+  id        String   @id
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+}
+
+model EmailVerification {
+  id        String   @id @default(uuid()) @db.Uuid
+  email     String   @unique
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}

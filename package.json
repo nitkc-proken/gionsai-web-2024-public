@@ -1,0 +1,33 @@
+{
+	"name": "remix-fullstack-template",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "pnpm run --parallel -r dev",
+		"build": "pnpm run --parallel -r build",
+		"start": "pnpm run --parallel -r start",
+		"remix": "pnpm --filter ./apps/remix run",
+		"datasource": "pnpm --filter ./packages/datasource run",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@biomejs/biome": "1.8.3",
+		"@types/node": "^20.11.17",
+		"lefthook": "^1.7.2",
+		"prisma": "^5.18.0",
+		"tsx": "^4.7.1",
+		"zod": "^3.23.8"
+	},
+	"packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228",
+	"prisma": {
+		"seed": "tsx prisma/seed/main.ts --tsconfig prisma/seed/tsconfig.json"
+	},
+	"dependencies": {
+		"@prisma/client": "5.18.0",
+		"pm2": "^5.4.2"
+	}
+}

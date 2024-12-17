@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://gionsai.jp/map.schema.yaml
+title: ProjectMap
+description: The schema for map.yaml
+type: array
+additionalProperties: false
+items:
+  type: object
+  additionalProperties: false
+  properties:
+    building:
+      type: string
+    x:
+      type: number
+    y:
+      type: number
+    floor:
+      type: array
+      items:
+        type: object
+        additionalProperties: false
+        properties:
+          name:
+            type: string
+          image:
+            type: string
+          projects:
+            type: array
+            items:
+              type: string
+              pattern: "^[A-Z]-[0-9]{1}{2}$"
+        required:
+          - image
+          - projects
+  required:
+    - building
+    - x
+    - y
+    - floor
