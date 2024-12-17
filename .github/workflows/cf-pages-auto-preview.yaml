@@ -1,0 +1,63 @@
+name: Cloudflare Pages Auto Preview
+
+on:
+  workflow_dispatch :
+    inputs:
+      deploy_branch:
+        description: 'デプロイ先ブランチ名'
+        type: string
+        required: true
+        default: 'main'
+  push:
+    branches:
+      - dev
+      - main
+    paths:
+      - 'apps/remix/**'
+permissions:
+  contents: read
+jobs:
+  build:
+    if: vars.ENABLE_CF_PAGES == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: SPA Build
+        run: pnpm run -C ./apps/remix spa-preview
+
+      - name: Deploy
+        uses: cloudflare/pages-action@v1
+        id: deploy-cloudflare-pages
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ vars.CF_ACCOUNT_ID }}
+          projectName: ${{ vars.CF_PROJECT_NAME }}
+          directory: 'apps/remix/build/client/'
+          branch: ${{ inputs.deploy_branch }} 
+          
