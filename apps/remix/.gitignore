@@ -1,0 +1,5 @@
+/.cache
+/.wrangler
+/build
+.env
+!.env.preview

@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://gionsai.jp/events.schema.yaml
+title: Events
+description: The schema for events.yaml
+type: object
+additionalProperties: false
+required:
+  - day1
+  - day2
+$defs: 
+  day:
+    type: object
+    additionalProperties: false
+    properties:
+      date:
+        type: string
+        format: date
+      gym1:
+        type: array
+        items:
+          $ref: "#/$defs/event"
+      gym2:
+        type: array
+        items:
+          $ref: "#/$defs/event"
+      lectureRoom6:
+        type: array
+        items:
+          $ref: "#/$defs/event"
+    required:
+      - date
+      - gym1
+      - gym2
+      - lectureRoom6
+  event:
+    additionalProperties: false
+    type: object
+    properties:
+      startTime:
+        type: string
+        pattern: ^(2[0-3]|[0-1][0-9]):[0-5][0-9]$
+      finishTime:
+        type: string
+        pattern: ^(2[0-3]|[0-1][0-9]):[0-5][0-9]$
+      title:
+        type: string
+      description:
+        type: string
+    required:
+      - startTime
+      - finishTime
+      - title
+properties: 
+  day1:
+    $ref: "#/$defs/day"
+  day2:
+    $ref: "#/$defs/day"

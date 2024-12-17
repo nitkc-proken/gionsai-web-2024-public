@@ -1,0 +1,18 @@
+- name: "校 長"
+  role: "校長"
+  en_role: "Principal"
+  body: |-
+    あいさつ
+
+- name: "学友 会長"
+  role: "学友会長"
+  en_role: "Student Council President"
+  body: |-
+    あいさつ
+
+- name: "実行 委員長"
+  role: "実行委員長"
+  en_role: "Executive Committee Chair"
+  body: |-
+    あいさつ
+

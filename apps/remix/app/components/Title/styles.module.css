@@ -1,0 +1,14 @@
+
+.edging-text{
+  --stroke-color: #7676764f;
+  --w:1px; /* 縁の太さ */
+  text-shadow: 
+    var(--w)            var(--w)            0px var(--stroke-color),
+    calc(-1 * var(--w)) var(--w)            0px var(--stroke-color),
+    var(--w)            calc(-1 * var(--w)) 0px var(--stroke-color),
+    calc(-1 * var(--w)) calc(-1 * var(--w)) 0px var(--stroke-color),
+    var(--w)            0px                 0px var(--stroke-color),
+    0px                 var(--w)            0px var(--stroke-color),
+    calc(-1 * var(--w)) 0px                 0px var(--stroke-color),
+    0px                 calc(-1 * var(--w)) 0px var(--stroke-color);
+}

@@ -1,0 +1,73 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://gionsai.jp/bus.schema.json",
+	"title": "Bus Timetable",
+	"description": "バスの時刻表",
+	"type": "object",
+	"properties": {
+		"toKosen": {
+			"description": "駅から高専に行くバス",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"from": {
+						"type": "string",
+						"title": "出発するバス停",
+						"description": "east : 東口 west : 西口",
+						"enum": ["east", "west"]
+					},
+					"to": {
+						"type": "string",
+						"title": "到着するバス停",
+						"description": "front : 高専前 back : 高専裏",
+						"enum": ["front", "back"]
+					},
+					"time": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"pattern": "^(2[0-3]|[0-1][0-9]):[0-5][0-9]$"
+						}
+					},
+					"additionalProperties": false
+				},
+				"required": ["from", "to", "time"]
+			},
+			"uniqueItems": true
+		},
+		"fromKosen": {
+			"description": "高専から駅に行くバス",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"from": {
+						"type": "string",
+						"title": "出発するバス停",
+						"description": "front : 高専前 back : 高専裏",
+						"enum": ["front", "back"]
+					},
+					"to": {
+						"type": "string",
+						"title": "到着するバス停",
+						"description": "east : 東口 west : 西口",
+						"enum": ["east", "west"]
+					},
+					"time": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"pattern": "^(2[0-3]|[0-1][0-9]):[0-5][0-9]$"
+						}
+					},
+					"additionalProperties": false
+				},
+				"required": ["from", "to", "time"]
+			},
+			"uniqueItems": true
+		}
+	},
+	"required": ["toKosen", "fromKosen"],
+	"additionalProperties": false
+}

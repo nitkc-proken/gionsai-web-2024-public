@@ -1,0 +1,102 @@
+# yaml-language-server: $schema=schemas/events.schema.yaml
+day1:
+  date: 2024-11-02
+  gym1:
+    - startTime: 10:00
+      finishTime: 10:15
+      title: 入場開始
+    - startTime: 10:15
+      finishTime: 11:50
+      title: 軽音
+      description: |
+        10:15~10:35 ああああ
+        10:40~11:00 いいいい
+        11:05~11:25 うううう
+        11:30~11:50 ええええ
+    - startTime: 12:40
+      finishTime: 13:25
+      title: 休憩
+    - startTime: 13:35
+      finishTime: 14:20
+      title: ダンス部
+    - startTime: 14:35
+      finishTime: 15:35
+      title: 軽音
+      description: |
+        14:35~14:50 おおおお
+        14:55~15:10 かかかか
+        15:15~15:35 きききき
+  gym2:
+    - startTime: 13:30
+      finishTime: 14:00
+      title: 入場開始
+    - startTime: 14:00
+      finishTime: 14:40
+      title: 吹奏楽演奏
+  lectureRoom6:
+    - startTime: 10:45
+      finishTime: 11:00
+      title: 入場開始
+    - startTime: 11:00
+      finishTime: 12:00
+      title: ピアノ同好会第一部
+    - startTime: 12:00
+      finishTime: 13:00
+      title: 休憩
+    - startTime: 13:00
+      finishTime: 14:00
+      title: 合唱同好会
+    - startTime: 14:00
+      finishTime: 15:00
+      title: 休憩
+    - startTime: 15:00
+      finishTime: 16:00
+      title: ピアノ同好会第二部
+
+day2:
+  date: 2024-11-03
+  gym1:
+    - startTime: 10:00
+      finishTime: 10:15
+      title: 入場開始
+    - startTime: 10:15
+      finishTime: 12:15
+      title: 軽音
+      description: |
+        10:15~10:35 くくくく
+        10:40~11:25 けけけけ
+        11:30~11:50 ささささ
+        11:55~12:15 しししし
+    - startTime: 12:30
+      finishTime: 13:15
+      title: 休憩
+    - startTime: 13:25
+      finishTime: 14:10
+      title: ダンス部
+    - startTime: 14:25
+      finishTime: 15:35
+      title: 軽音
+      description: |
+        14:25~14:45 すすすす
+        14:50~15:10 せせせせ
+        15:15~15:35 そそそそ
+  gym2:
+    - startTime: 13:30
+      finishTime: 14:00
+      title: 入場開始
+    - startTime: 14:00
+      finishTime: 14:40
+      title: 吹奏楽演奏
+  lectureRoom6:
+    - startTime: 10:45
+      finishTime: 11:00
+      title: 入場開始
+    - startTime: 11:00
+      finishTime: 12:00
+      title: ピアノ同好会第一部
+    - startTime: 12:00
+      finishTime: 13:00
+      title: 休憩
+    - startTime: 13:00
+      finishTime: 13:40
+      title: 合唱同好会

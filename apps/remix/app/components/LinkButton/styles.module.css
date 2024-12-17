@@ -1,0 +1,30 @@
+.link-button{
+  @apply inline-block p-3 border border-black min-w-40 whitespace-nowrap text-center relative;
+}
+
+.link-button:hover{
+  @apply bg-elevated
+}
+
+.link-button:hover::after{
+  @apply border-black;
+  border-width: 1px 0 1px 0;
+  content: "";
+  position: absolute;
+  animation: hover .1s ease-out forwards;
+}
+
+@keyframes hover{
+  0%{
+    top: -5px;
+    left: 10%;
+    width: calc(100% - 20%);
+    height: calc(100% + 10px);
+  }
+  100%{
+    top: -15px;
+    left: 5%;
+    width: calc(100% - 10%);
+    height: calc(100% + 30px);
+  }
+}

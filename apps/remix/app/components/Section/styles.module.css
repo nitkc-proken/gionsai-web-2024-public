@@ -1,0 +1,36 @@
+.section-title-wrapper{
+    @apply flex items-center my-3;
+}
+
+.section-title-divider{
+  height: 2px;
+  @apply grow bg-black;
+}
+
+.section-title-main{
+  @apply relative lg:block px-8 lg:pl-0 lg:pr-4 flex justify-center whitespace-nowrap;
+}
+.section-title-main-sub{
+  @apply font-bold text-white font-inter stroke-slate-700 ;
+  z-index: -1;
+
+  /* Figma の指定通り縁取りを 0.5pxにすると色が滲むので、少し透明にして主張を小さく */
+  --stroke-color: #7676764f;
+  --w:1px; /* 縁の太さ */
+  text-shadow: 
+    var(--w)            var(--w)            0px var(--stroke-color),
+    calc(-1 * var(--w)) var(--w)            0px var(--stroke-color),
+    var(--w)            calc(-1 * var(--w)) 0px var(--stroke-color),
+    calc(-1 * var(--w)) calc(-1 * var(--w)) 0px var(--stroke-color),
+    var(--w)            0px                 0px var(--stroke-color),
+    0px                 var(--w)            0px var(--stroke-color),
+    calc(-1 * var(--w)) 0px                 0px var(--stroke-color),
+    0px                 calc(-1 * var(--w)) 0px var(--stroke-color);
+}
+.section-title-main-sub-pc{
+  writing-mode: vertical-rl;
+}
+.section-title-main-sub-sp{
+  letter-spacing: 0.7rem;
+  margin-right: -0.7rem;
+}
